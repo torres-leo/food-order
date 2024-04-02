@@ -1,13 +1,14 @@
 'use client';
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Product } from '@prisma/client';
 
-import HamburgerIcon from '@/components/Icons/HamburgerIcon';
-import Section from '@/components/SectionContainer/Section';
-import { useStatesStore } from '@/store/states';
 import { getProducts } from './actions/getProduct-action';
+import { useStatesStore } from '@/store/states';
+
+import HamburgerIcon from '@/components/Icons/HamburgerIcon';
 import Loading from '@/components/Loading';
-import ProductCard from '@/components/ui/ProductCard';
+import ProductCard from '@/components/Products/ProductCard';
+import Section from '@/components/SectionContainer/Section';
 
 function OrderPage({ params }: { params: { category: string } }) {
 	const [products, setProducts] = useState<Product[]>();
@@ -46,7 +47,9 @@ function OrderPage({ params }: { params: { category: string } }) {
 			</div>
 
 			{loading && <Loading />}
-			<div className='grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 '>{renderProducts()}</div>
+			<div className='grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 items-start gap-6 gap-y-10 place-items-center'>
+				{renderProducts()}
+			</div>
 		</Section>
 	);
 }
