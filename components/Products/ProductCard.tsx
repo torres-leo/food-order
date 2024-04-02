@@ -9,8 +9,7 @@ function ProductCard({ product }: ProductCardProps) {
 	return (
 		<article className='product'>
 			<picture className='product__image'>
-				<Image fill src={`/images/products/${product.image}.jpg`} alt='product image' />
-				{/* <Image className='absolute' fill src={`/images/products/${product.image}.jpg`} alt='product image' /> */}
+				<Image fill src={`/images/products/${product.image}.jpg`} alt='product image' loading='lazy' />
 			</picture>
 			<div className='product__info'>
 				<h3 className='product__info--title'>{product.name}</h3>
