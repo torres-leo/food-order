@@ -1,0 +1,23 @@
+.product {
+	@apply max-w-[280px] w-full dark:bg-white/10 rounded-md relative pb-6;
+
+	&__image {
+		@apply w-auto h-56 relative block mb-4 overflow-hidden rounded-t-md z-10;
+
+		img {
+			@apply rounded-t-md hover:scale-110 transition;
+		}
+	}
+
+	&__info {
+		@apply px-4;
+
+		&--title {
+			@apply text-lg font-semibold mb-3;
+		}
+
+		&--price {
+			@apply text-xl font-bold dark:text-yellow-400;
+		}
+	}
+}
