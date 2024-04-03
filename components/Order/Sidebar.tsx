@@ -19,7 +19,7 @@ export default async function OrderSidebar() {
 	});
 
 	return (
-		<aside className='md:w-72 md:h-screen bg-white/90 dark:bg-white/10 py-6 px-3'>
+		<aside className='md:w-72 md:h-screen bg-white/90 dark:bg-white/10 py-6 px-3 overflow-y-hidden'>
 			<h3 className='mb-6 text-center font-semibold text-xl select-none'>Categories</h3>
 			<nav>{renderCategories}</nav>
 		</aside>

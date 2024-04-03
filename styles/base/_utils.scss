@@ -3,3 +3,21 @@
 		@apply max-w-[1300px] w-full mx-auto;
 	}
 }
+
+.scrollbar::-webkit-scrollbar {
+	width: 8px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+	border-radius: 100vh;
+	background: #878787;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+	background: #5a5a5a;
+	border-radius: 100vh;
+}
+
+.sb-g {
+	scrollbar-gutter: stable;
+}

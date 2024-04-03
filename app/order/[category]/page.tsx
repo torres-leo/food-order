@@ -31,9 +31,15 @@ function OrderPage({ params }: { params: { category: string } }) {
 	}, [params.category, setLoading]);
 
 	const renderProducts = () => {
-		return products?.map((product) => {
-			return <ProductCard key={product.id} product={product} />;
-		});
+		if (loading) return <Loading />;
+
+		return (
+			<div className='grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 items-start gap-6 gap-y-20 place-items-center transition overflow-y-scroll max-h-screen pb-44 scrollbar'>
+				{products?.map((product) => (
+					<ProductCard key={product.id} product={product} />
+				))}
+			</div>
+		);
 	};
 
 	return (
@@ -42,14 +48,11 @@ function OrderPage({ params }: { params: { category: string } }) {
 				<h2>OrderPage</h2>
 				<button className='relative' onClick={handleOrderSideBar}>
 					<HamburgerIcon className='size-10 dark:hover:opacity-65' />
-					<HamburgerIcon className='size-10 absolute top-0 hover:blur-lg' />
+					<HamburgerIcon className='size-10 absolute top-0 hover:blur-lg hover:opacity-65' />
 				</button>
 			</div>
 
-			{loading && <Loading />}
-			<div className='grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 items-start gap-6 gap-y-10 place-items-center'>
-				{renderProducts()}
-			</div>
+			{renderProducts()}
 		</Section>
 	);
 }
