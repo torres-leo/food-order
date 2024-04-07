@@ -38,7 +38,7 @@ function OrderPage({ params }: { params: { category: string } }) {
 				className={`grid grid-cols-1 gap-x-6 items-start gap-y-10 place-items-center xl:place-items-start transition overflow-y-auto max-h-screen pb-44 scrollbar ${
 					orderSideBar
 						? 'lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3'
-						: 'lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'
+						: 'md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'
 				}`}>
 				{products?.map((product) => (
 					<ProductCard key={product.id} product={product} />

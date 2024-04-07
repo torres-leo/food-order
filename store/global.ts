@@ -8,6 +8,7 @@ interface GlobalStore {
 	increaseQuantity: (id: Product['id']) => void;
 	decreaseQuantity: (id: Product['id']) => void;
 	removeItem: (id: Product['id']) => void;
+	clearOrder: () => void;
 }
 
 export const useGlobalStore = create<GlobalStore>((set, get) => ({
@@ -20,15 +21,15 @@ export const useGlobalStore = create<GlobalStore>((set, get) => ({
 
 		if (productExists) {
 			items = get().order.map((item) => {
-				// if (item.quantity === 5) throw new Error('You can only add 5 items of the same product');
-				if (item.quantity === 5) return item;
+				if (item.id === product.id) {
+					if (item.quantity === 5) throw new Error('You can only add 5 items of the same product');
 
-				if (item.id === product.id)
 					return {
 						...item,
 						quantity: item.quantity + 1,
 						subtotal: (item.quantity + 1) * product.price,
 					};
+				}
 
 				return item;
 			});
@@ -72,5 +73,8 @@ export const useGlobalStore = create<GlobalStore>((set, get) => ({
 	},
 	removeItem: (id) => {
 		set((state) => ({ order: state.order.filter((item) => item.id !== id) }));
+	},
+	clearOrder: () => {
+		set(() => ({ order: [] }));
 	},
 }));

@@ -1,16 +1,28 @@
 .order-details {
 	@apply shadow rounded space-y-1 p-4 bg-white/20;
+	@apply md:p-1.5;
+	@apply lg:p-4;
 
 	&__wrapper {
 		@apply flex flex-col gap-y-3;
+		@apply md:gap-y-2;
+		@apply lg:gap-y-3;
 	}
 
 	&__header {
-		@apply flex justify-between items-center;
+		@apply flex justify-between items-center gap-x-1;
+	}
+
+	&__price {
+		@apply text-2xl text-yellow-500 font-semibold;
+		@apply md:text-xl;
+		@apply lg:text-2xl;
 	}
 
 	&__remove {
 		@apply text-red-400 text-sm border border-red-400 hover:opacity-90 hover:scale-105 transition rounded-full w-6 h-6;
+		@apply md:w-5 md:h-5 md:text-xs;
+		@apply lg:w-6 lg:h-6 lg:text-sm;
 	}
 
 	&__quantity {
