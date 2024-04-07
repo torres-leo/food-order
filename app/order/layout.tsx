@@ -8,10 +8,10 @@ export default function OrderLayout({
 }>) {
 	return (
 		<>
-			<div className='md:flex md:gap-x-10 overflow-x-hidden'>
+			<div className='md:flex '>
 				<OrderSidebar />
 
-				<main className='md:flex-1 p-4'>{children}</main>
+				<main className='md:flex-1 pl-2 xl:pl-4 pt-5 pr-2 overflow-y-hidden md:h-screen sb-g'>{children}</main>
 
 				<OrderSummary />
 			</div>

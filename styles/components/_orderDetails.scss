@@ -1,0 +1,33 @@
+.order-details {
+	@apply shadow rounded space-y-1 p-4 bg-white/20;
+
+	&__wrapper {
+		@apply flex flex-col gap-y-3;
+	}
+
+	&__header {
+		@apply flex justify-between items-center;
+	}
+
+	&__remove {
+		@apply text-red-400 text-sm border border-red-400 hover:opacity-90 hover:scale-105 transition rounded-full w-6 h-6;
+	}
+
+	&__quantity {
+		@apply flex items-center gap-4 px-4 py-1 border border-white/40 w-fit rounded-lg;
+	}
+
+	&__button {
+		&--decrease {
+			@apply text-yellow-500 text-xs border border-yellow-500 hover:opacity-90 rounded-full size-5 hover:bg-black/10 disabled:opacity-40 disabled:cursor-not-allowed;
+		}
+
+		&--increase {
+			@apply text-yellow-500 text-xs border border-yellow-500 hover:opacity-90 rounded-full size-5 hover:bg-black/10 disabled:opacity-40 disabled:cursor-not-allowed;
+		}
+	}
+
+	&__subtotal {
+		@apply ml-2 font-semibold text-yellow-500 underline underline-offset-4;
+	}
+}
