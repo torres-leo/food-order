@@ -20,13 +20,15 @@ const OrderDetails = ({ product }: OrderDetailsProps) => {
 		<div className='order-details'>
 			<div className='order-details__wrapper'>
 				<div className='order-details__header'>
-					<p className='text-lg font-bold text-white'>{product.name} </p>
+					<p className='text-lg leading-6 md:text-base md:leading-5 lg:text-lg lg:leading-6 font-medium text-white'>
+						{product.name}{' '}
+					</p>
 
 					<button className='order-details__remove' type='button' onClick={() => removeItem(product.id)}>
 						X
 					</button>
 				</div>
-				<p className='text-2xl text-yellow-500 font-semibold'>{formatCurrency(product.price)}</p>
+				<p className='order-details__price'>{formatCurrency(product.price)}</p>
 				<div className='flex items-center gap-x-2'>
 					<div className='order-details__quantity'>
 						<button
@@ -55,7 +57,7 @@ const OrderDetails = ({ product }: OrderDetailsProps) => {
 					)}
 				</div>
 
-				<p className='text-xl font-semibold '>
+				<p className='text-xl md:text-lg lg:text-xl font-semibold '>
 					Subtotal:
 					<span className='order-details__subtotal'>{formatCurrency(product.subtotal)}</span>
 				</p>
