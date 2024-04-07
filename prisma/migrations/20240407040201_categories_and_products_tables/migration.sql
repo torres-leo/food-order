@@ -1,10 +1,19 @@
 -- CreateTable
-CREATE TABLE "Product" (
+CREATE TABLE "Category" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
-    "description" TEXT NOT NULL,
-    "price" DOUBLE PRECISION NOT NULL,
+    "slug" TEXT NOT NULL,
+
+    CONSTRAINT "Category_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Product" (
+    "id" SERIAL NOT NULL,
     "categoryId" INTEGER NOT NULL,
+    "image" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "price" DOUBLE PRECISION NOT NULL,
 
     CONSTRAINT "Product_pkey" PRIMARY KEY ("id")
 );

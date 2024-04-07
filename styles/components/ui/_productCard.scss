@@ -1,8 +1,8 @@
 .product {
-	@apply max-w-[270px] min-h-[354px] h-full w-full dark:bg-white/10 rounded-md relative pb-6 border border-white/40;
+	@apply max-w-[270px] min-h-[420px] h-full w-full dark:bg-white/10 rounded-md relative pb-6 border border-white/40 flex flex-col;
 
 	&__image {
-		@apply w-auto h-60 relative block mb-2 overflow-hidden rounded-t-md z-10 border-b border-white/40;
+		@apply w-auto h-64 relative block mb-3 overflow-hidden rounded-t-md z-10 border-b border-white/40;
 
 		img {
 			@apply rounded-t-md hover:scale-110 transition;
@@ -10,14 +10,20 @@
 	}
 
 	&__info {
-		@apply px-4;
+		@apply px-4 relative h-20;
 
 		&--title {
-			@apply text-lg font-semibold mb-3 leading-[1.4];
+			@apply text-lg font-semibold leading-[1.1];
 		}
 
 		&--price {
-			@apply text-xl font-bold dark:text-yellow-400 absolute bottom-3;
+			@apply text-xl font-bold text-yellow-500 absolute bottom-0;
 		}
+	}
+
+	&__button {
+		@apply flex items-center justify-between bg-white/30 border-b-4 border-orange-400 p-2 rounded absolute bottom-3 font-bold transition;
+		@apply max-w-[91%] w-full mx-auto left-[50%] right-[50%] translate-x-[-50%];
+		@apply hover:scale-105 hover:bg-gradient-to-tr hover:from-yellow-400 from-45%  hover:to-orange-400 hover:to-95% hover:border-b-black/10 hover:text-black hover:opacity-90;
 	}
 }

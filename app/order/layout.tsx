@@ -11,7 +11,7 @@ export default function OrderLayout({
 			<div className='md:flex '>
 				<OrderSidebar />
 
-				<main className='md:flex-1 p-4 pt-5 overflow-y-hidden md:h-screen sb-g'>{children}</main>
+				<main className='md:flex-1 pl-2 xl:pl-4 pt-5 pr-2 overflow-y-hidden md:h-screen sb-g'>{children}</main>
 
 				<OrderSummary />
 			</div>
