@@ -2,13 +2,14 @@
 import { useEffect, useState } from 'react';
 import { Product } from '@prisma/client';
 
-import { getProducts } from '@/src/lib/actions/getProduct';
+import { getProducts } from '@/src/utils/getProducts';
 import { useStatesStore } from '@/store/states';
 
 import HamburgerIcon from '@/components/Icons/HamburgerIcon';
 import Loading from '@/components/Loading';
 import ProductCard from '@/components/Products/ProductCard';
 import Section from '@/components/SectionContainer/Section';
+import Heading from '@/components/ui/Heading';
 
 function OrderPage({ params }: { params: { category: string } }) {
 	const [products, setProducts] = useState<Product[]>();
@@ -50,7 +51,7 @@ function OrderPage({ params }: { params: { category: string } }) {
 	return (
 		<Section className='' wpClasses=''>
 			<div className='flex items-center justify-between mb-10'>
-				<h1 className='text-5xl font-bold text-center flex-1 text-yellow-500'>Menu</h1>
+				<Heading>Menu</Heading>
 				<button className='relative' onClick={handleOrderSideBar}>
 					<HamburgerIcon className='size-10 dark:hover:opacity-65' />
 					<HamburgerIcon className='size-10 absolute top-0 hover:blur-lg hover:opacity-65' />
