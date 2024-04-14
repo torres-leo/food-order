@@ -5,7 +5,7 @@ import Route from '@/components/admin/Routes';
 const adminNavigation = [
 	{ url: '/admin/orders', text: 'Orders', blank: false, icon: 'order' },
 	{ url: '/admin/products', text: 'Products', blank: false, icon: 'products' },
-	{ url: '/order/cafe', text: 'Ver Quiosco', blank: true, icon: 'store' },
+	{ url: '/order/coffee', text: 'Ver Quiosco', blank: true, icon: 'store' },
 ];
 
 export default function AdminSidebar() {

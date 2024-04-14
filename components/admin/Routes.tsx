@@ -17,7 +17,7 @@ type RouteProps = {
 
 const Route = ({ link }: RouteProps) => {
 	const pathName = usePathname();
-	const isActive = pathName === link.url;
+	const isActive = pathName.includes(link.url);
 
 	const renderIcon = (icon: string) => {
 		if (icon === 'order') {
