@@ -94,7 +94,7 @@ function OrderSummary() {
 			<form className='w-full border-t pt-5 border-white/45' action={handleConfirmOrder}>
 				<input
 					type='text'
-					placeholder='Write your name for the order..'
+					placeholder='Type your name for the order..'
 					className=' border rounded border-gray-500 p-2.5 w-full mb-5 outline-none text-sm tracking-wide font-light'
 					name='name'
 				/>
