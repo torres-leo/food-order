@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Logo from '../ui/Logo';
-import Route from '@/components/admin/Routes';
+import AdminRoute from '@/components/admin/Route';
 
 const adminNavigation = [
 	{ url: '/admin/orders', text: 'Orders', blank: false, icon: 'order' },
@@ -9,7 +9,7 @@ const adminNavigation = [
 ];
 
 export default function AdminSidebar() {
-	const renderLinks = adminNavigation.map((link) => <Route key={link.url} link={link} />);
+	const renderLinks = adminNavigation.map((link) => <AdminRoute key={link.url} link={link} />);
 
 	return (
 		<aside className='aside'>

@@ -15,7 +15,7 @@ type RouteProps = {
 	};
 };
 
-const Route = ({ link }: RouteProps) => {
+const AdminRoute = ({ link }: RouteProps) => {
 	const pathName = usePathname();
 	const isActive = pathName.includes(link.url);
 
@@ -50,4 +50,4 @@ const Route = ({ link }: RouteProps) => {
 	);
 };
 
-export default Route;
+export default AdminRoute;
