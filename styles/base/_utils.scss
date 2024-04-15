@@ -21,3 +21,21 @@
 .sb-g {
 	scrollbar-gutter: stable;
 }
+
+#table-head {
+	animation: blur linear both;
+	animation-timeline: scroll();
+	animation-range: 0 1500px;
+	z-index: 10;
+}
+
+@keyframes blur {
+	to {
+		box-shadow: 0 5px 50px -5px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.3);
+		color: yellow;
+		background: rgba(0, 0, 0, 0.45);
+		backdrop-filter: blur(15px);
+		transform: translateY(-25px);
+		width: 100%;
+	}
+}
