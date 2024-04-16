@@ -1,4 +1,4 @@
-import { OrderItem } from '@/src/types/orderItem';
+import { OrderItem } from '@/src/types/OrderItem';
 import { formatCurrency } from '@/src/utils/formatCurrency';
 import { useGlobalStore } from '@/store/global';
 import { useMemo } from 'react';

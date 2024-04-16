@@ -1,4 +1,4 @@
-import { OrderItem } from '@/src/types/orderItem';
+import { OrderItem } from '@/src/types/OrderItem';
 import { Product } from '@prisma/client';
 import { create } from 'zustand';
 

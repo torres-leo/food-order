@@ -23,8 +23,8 @@ const getCategoryProduct = async (product: Product) => {
 export default function ProductsTable({ products }: ProductsTableProps) {
 	const renderProducts = products.map((product, idx) => (
 		<tr key={product.id} className='productsTable__body--row'>
-			<td className='text-center border-r'>{idx + 1}</td>
-			<td className='productsTable__body--col w-2/4 text-left mx-auto block leading-5'>{product.name}</td>
+			{/* <td className='text-center border-r'>{idx + 1}</td> */}
+			<td className='productsTable__body--col pl-24 text-left mx-auto block leading-5'>{product.name}</td>
 			<td className='productsTable__body--col'>{formatCurrency(product.price)}</td>
 			<td className='productsTable__body--col'>{product.category.name}</td>
 			<td className='relative productsTable__body--col'>
@@ -40,9 +40,9 @@ export default function ProductsTable({ products }: ProductsTableProps) {
 			<table className='productsTable__table'>
 				<thead className='productsTable__head' id='table-head'>
 					<tr>
-						<th scope='col' className='py-4 border-r productsTable__head--col w-8'>
+						{/* <th scope='col' className='py-4 border-r productsTable__head--col w-8'>
 							#
-						</th>
+						</th> */}
 						<th scope='col' className='pl-3 py-4 productsTable__head--col'>
 							Product
 						</th>
