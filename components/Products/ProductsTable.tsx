@@ -24,7 +24,7 @@ export default function ProductsTable({ products }: ProductsTableProps) {
 	const renderProducts = products.map((product, idx) => (
 		<tr key={product.id} className='productsTable__body--row'>
 			{/* <td className='text-center border-r'>{idx + 1}</td> */}
-			<td className='productsTable__body--col pl-24 text-left mx-auto block leading-5'>{product.name}</td>
+			<td className='productsTable__body--col pl-3 text-left mx-auto block leading-5'>{product.name}</td>
 			<td className='productsTable__body--col'>{formatCurrency(product.price)}</td>
 			<td className='productsTable__body--col'>{product.category.name}</td>
 			<td className='relative productsTable__body--col'>

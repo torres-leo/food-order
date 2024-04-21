@@ -47,11 +47,11 @@ export default async function ProductsPage({ searchParams }: { searchParams: { p
 			<div className='mb-10 flex items-center gap-x-3 w-full'>
 				<Link
 					href={`/admin/products/add`}
-					className='block min-w-fit py-1.5 px-3 border border-amber-400 rounded text-amber-300 hover:bg-amber-400 hover:text-white transition'>
+					className='block min-w-fit py-2 px-3 border-2 border-amber-400 rounded text-amber-300 hover:bg-amber-400 hover:text-white transition'>
 					<span className='font-semibold rounded-full text-base'>+</span> Add Product
 				</Link>
 
-				<SearchForm></SearchForm>
+				<SearchForm />
 			</div>
 
 			<section className='flex flex-col justify-center items-center gap-y-10'>

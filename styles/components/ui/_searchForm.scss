@@ -1,0 +1,15 @@
+.search-form {
+	@apply flex items-center w-full;
+
+	&__input {
+		@apply p-2 w-1/3 border-2 border-gray-300 rounded rounded-e-none pl-5 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent;
+	}
+
+	&__submit {
+		@apply p-2 w-1/12 border-2 border-s-0 border-gray-300 rounded rounded-s-none focus:outline-none focus:ring-1 bg-blue-500;
+	}
+}
+
+.search-form__input:focus + .search-form__submit {
+	@apply outline-none border-2;
+}

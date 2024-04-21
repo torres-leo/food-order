@@ -9,7 +9,7 @@
 		@apply text-white border-b border-gray-300 w-full sticky -top-4;
 
 		&--col {
-			@apply text-center text-base font-semibold tracking-wide;
+			@apply text-left text-base font-semibold tracking-wide;
 		}
 	}
 
@@ -21,7 +21,7 @@
 		}
 
 		&--col {
-			@apply py-2.5 text-sm text-center font-medium;
+			@apply py-2.5 text-sm text-left font-medium;
 		}
 	}
 
