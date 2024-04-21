@@ -1,0 +1,31 @@
+.productsTable {
+	@apply bg-white/10 rounded-sm;
+
+	&__table {
+		@apply w-full table-fixed;
+	}
+
+	&__head {
+		@apply text-white border-b border-gray-300 w-full sticky -top-4;
+
+		&--col {
+			@apply text-left text-base font-semibold tracking-wide;
+		}
+	}
+
+	&__body {
+		@apply divide-y divide-gray-200;
+
+		&--row {
+			@apply odd:bg-zinc-900 even:bg-gray-50/5 text-white;
+		}
+
+		&--col {
+			@apply py-2.5 text-sm text-left font-medium;
+		}
+	}
+
+	&__edit {
+		@apply text-green-400 hover:text-green-500 border rounded py-1 px-2 border-green-400 hover:border-green-500 hover:border-white/90 transition;
+	}
+}
