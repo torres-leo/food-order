@@ -6,7 +6,7 @@ import OrderIcon from '../Icons/OrderIcon';
 import StoreIcon from '../Icons/StoreIcon';
 import ProductsIcon from '../Icons/ProductsIcon';
 
-type RouteProps = {
+type AdminRouteProps = {
 	link: {
 		url: string;
 		text: string;
@@ -15,7 +15,7 @@ type RouteProps = {
 	};
 };
 
-const AdminRoute = ({ link }: RouteProps) => {
+const AdminRoute = ({ link }: AdminRouteProps) => {
 	const pathName = usePathname();
 	const isActive = pathName.includes(link.url);
 

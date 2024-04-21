@@ -1,7 +1,14 @@
-import React from 'react';
+import AddProductForm from '@/components/Products/AddProductForm';
+import Heading from '@/components/ui/Heading';
 
 const AddProductPage = () => {
-	return <div>Add Products</div>;
+	return (
+		<>
+			<Heading>New Product</Heading>
+
+			<AddProductForm />
+		</>
+	);
 };
 
 export default AddProductPage;

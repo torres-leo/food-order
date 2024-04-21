@@ -51,7 +51,7 @@ function OrderPage({ params }: { params: { category: string } }) {
 	return (
 		<Section className='' wpClasses=''>
 			<div className='flex items-center justify-between mb-10'>
-				<Heading>Menu</Heading>
+				<Heading className='mb-0'>Menu</Heading>
 				<button className='relative' onClick={handleOrderSideBar}>
 					<HamburgerIcon className='size-10 dark:hover:opacity-65' />
 					<HamburgerIcon className='size-10 absolute top-0 hover:blur-lg hover:opacity-65' />
