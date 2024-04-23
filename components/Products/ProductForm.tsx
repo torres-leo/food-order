@@ -1,25 +1,26 @@
+import { prisma } from '@/src/lib/prisma';
 import FloatingInput from '../ui/FloatingInput';
+import DropdownCategory from './DropdownCategory';
+
+async function getCategories() {
+	return await prisma.category.findMany({
+		select: {
+			id: true,
+			name: true,
+		},
+	});
+}
 
 export default async function ProductForm() {
+	const categories = await getCategories();
+
 	return (
 		<div className='flex flex-col gap-y-4 text-white'>
 			<FloatingInput label='product name' id='product-name' inputType='text' />
 
 			<FloatingInput label='price' id='product-price' inputType='text' />
 
-			<div className='space-y-2'>
-				<label className='' htmlFor='categoryId'>
-					Category
-				</label>
-				<select
-					className='block w-full bg-slate-100 text-black rounded py-2 px-2 text-center'
-					id='categoryId'
-					name='categoryId'>
-					<option value='' disabled selected>
-						-- Select --
-					</option>
-				</select>
-			</div>
+			<DropdownCategory options={categories} placeholder='Select Category...' />
 		</div>
 	);
 }

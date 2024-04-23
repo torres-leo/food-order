@@ -1,0 +1,14 @@
+.react-dropdown-select {
+	&:focus-within {
+		box-shadow: none !important;
+	}
+
+	&-item {
+		color: black;
+		border-bottom: 2px solid rgba(orange, 0.2) !important;
+
+		&:last-child {
+			border-bottom: none !important;
+		}
+	}
+}
