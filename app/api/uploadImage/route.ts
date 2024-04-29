@@ -5,7 +5,7 @@ import axios from 'axios';
 export async function POST(request: NextRequest, res: NextApiResponse) {
 	const data = await request.formData();
 	const file: File | null = data.get('file') as unknown as File;
-	const cloudflareUrl = `https://api.cloudflare.com/client/v4/accounts/2334dad7242d80be2e13b1ea2056019b/images/v1`;
+	const cloudflareUrl = `https://api.cloudflare.com/client/v4/accounts/${process.env.CLOUDFLARE_ACCOUNT_ID}/images/v1`;
 
 	// return NextResponse.json({ message: 'HELLLOOOOOOOOOOUUU' });
 
