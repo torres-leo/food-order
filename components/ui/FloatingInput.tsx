@@ -1,3 +1,5 @@
+'use client';
+
 type InputType = 'text' | 'number' | 'email' | 'password' | 'date' | 'time' | 'tel';
 
 type FloatingInputProps = {
@@ -9,9 +11,24 @@ type FloatingInputProps = {
 };
 
 const FloatingInput = ({ label, inputClassName, labelClassName, id, inputType }: FloatingInputProps) => {
+	const handleInputNumber = (evt: React.KeyboardEvent<HTMLInputElement>) => {
+		if (inputType === 'number') {
+			if (['e', 'E', '+', '-'].includes(evt.key)) {
+				evt.preventDefault();
+			}
+		}
+	};
+
 	return (
 		<div className='relative'>
-			<input type={inputType} id={id} className={`input-floating peer ${inputClassName}`} placeholder=' ' />
+			<input
+				type={inputType}
+				id={id}
+				name={id}
+				className={`input-floating peer ${inputClassName}`}
+				placeholder=' '
+				onKeyDown={handleInputNumber}
+			/>
 			<label htmlFor={id} className={`input-floating--label ${labelClassName}`}>
 				{label}
 			</label>

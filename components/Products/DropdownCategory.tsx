@@ -24,6 +24,7 @@ export default function DropdownCategory({ options, placeholder, className, colo
 	return (
 		<Select
 			options={options}
+			name='category-id'
 			labelField='name'
 			valueField='id'
 			values={selectedValues}

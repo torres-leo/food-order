@@ -1,26 +1,33 @@
-import { prisma } from '@/src/lib/prisma';
+'use client';
+
+import { useGlobalStore } from '@/store/global';
 import FloatingInput from '../ui/FloatingInput';
 import DropdownCategory from './DropdownCategory';
 
-async function getCategories() {
-	return await prisma.category.findMany({
-		select: {
-			id: true,
-			name: true,
-		},
-	});
-}
+type ProductFormProps = {
+	categories: { id: number; name: string }[];
+};
 
-export default async function ProductForm() {
-	const categories = await getCategories();
+export default function ProductForm({ categories }: ProductFormProps) {
+	const { setImageProd } = useGlobalStore();
 
 	return (
-		<div className='flex flex-col gap-y-4 text-white'>
+		<div className='flex flex-col gap-y-6 text-white'>
 			<FloatingInput label='product name' id='product-name' inputType='text' />
 
-			<FloatingInput label='price' id='product-price' inputType='text' />
+			<FloatingInput label='price' id='product-price' inputType='number' />
 
 			<DropdownCategory options={categories} placeholder='Select Category...' />
+
+			{/* <input
+				name='file'
+				type='file'
+				accept='.png, .jpeg, .jpg, .webp'
+				onChange={(e) => {
+					const file = e.target.files?.[0];
+					setImageProd(file);
+				}}
+			/> */}
 		</div>
 	);
 }

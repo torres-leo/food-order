@@ -9,5 +9,9 @@
 				@apply rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto;
 			}
 		}
+
+		&-floating:not(:placeholder-shown) + .input-floating--label {
+			@apply bg-gray-200 text-black rounded-full;
+		}
 	}
 }

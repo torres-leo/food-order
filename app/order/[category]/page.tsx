@@ -20,6 +20,7 @@ function OrderPage({ params }: { params: { category: string } }) {
 			try {
 				setLoading(true);
 				const data = await getProducts(params.category);
+
 				setProducts(data);
 			} catch (error) {
 				console.error('Error fetching products:', error);

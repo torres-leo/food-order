@@ -9,10 +9,16 @@ interface GlobalStore {
 	decreaseQuantity: (id: Product['id']) => void;
 	removeItem: (id: Product['id']) => void;
 	clearOrder: () => void;
+	imageProd: File | null;
+	setImageProd: (file: File) => void;
 }
 
 export const useGlobalStore = create<GlobalStore>((set, get) => ({
 	order: [],
+	imageProd: null,
+	setImageProd: (file) => {
+		set(() => ({ imageProd: file }));
+	},
 	addToCart: (product) => {
 		const { categoryId, image, ...rest } = product;
 		let items: OrderItem[] = [];
