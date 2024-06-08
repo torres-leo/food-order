@@ -1,6 +1,12 @@
 import OrderSidebar from '@/components/Order/Sidebar';
 import OrderSummary from '@/components/Order/Summary';
 import ToastNotify from '@/components/ui/ToastNotify';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Fast Food - Products',
+	description: 'Fast Food',
+};
 
 export default function OrderLayout({
 	children,

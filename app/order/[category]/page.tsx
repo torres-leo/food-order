@@ -10,10 +10,24 @@ import Loading from '@/components/Loading';
 import ProductCard from '@/components/Products/ProductCard';
 import Section from '@/components/SectionContainer/Section';
 import Heading from '@/components/ui/Heading';
+import axios from 'axios';
+import { useGlobalStore } from '@/store/global';
 
 function OrderPage({ params }: { params: { category: string } }) {
 	const [products, setProducts] = useState<Product[]>();
 	const { orderSideBar, handleOrderSideBar, loading, setLoading } = useStatesStore();
+	const { setImages } = useGlobalStore();
+
+	useEffect(() => {
+		const getImages = async () => {
+			setLoading(true);
+			const { data } = await axios.get('/api/images');
+			setImages(data.result);
+			setLoading(false);
+		};
+
+		getImages();
+	}, []);
 
 	useEffect(() => {
 		const fetchProducts = async () => {

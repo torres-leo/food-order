@@ -1,14 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
 import { ProductSchema } from '@/src/validator/productSchema';
-import { uploadProductImage } from '@/src/utils/upload-image';
 import { createProduct } from '@/src/lib/actions/create-product';
-import { useGlobalStore } from '@/store/global';
 
 type AddProductFormProps = {
 	children: React.ReactNode;
@@ -17,20 +14,29 @@ type AddProductFormProps = {
 
 export default function AddProductForm({ children, categories }: AddProductFormProps) {
 	const router = useRouter();
-	// const [imageProd, setImageProd] = useState(null);
-	const { imageProd } = useGlobalStore();
 
 	const handleSubmit = async (formData: FormData) => {
 		const category = formData.get('category-id');
-
 		const catSelected = categories.find((cat) => cat.name === category);
+
+		// if (!image) {
+		// 	toast.error('Please select an image');
+		// 	return;
+		// }
+
+		// const uploadImage = await handleUploadImage(image as File);
+		// console.log(uploadImage);
+
+		// if (!uploadImage) {
+		// 	toast.error('');
+		// 	return;
+		// }
 
 		const data = {
 			name: formData.get('product-name') as string,
 			price: formData.get('product-price'),
 			categoryId: category ? catSelected?.id : '',
-			// image: imageProd?.name ?? '',
-			image: 'test',
+			image: formData.get('file'),
 		};
 
 		const result = ProductSchema.safeParse(data);
@@ -43,39 +49,45 @@ export default function AddProductForm({ children, categories }: AddProductFormP
 			return;
 		}
 
-		// try {
-		// const uploadInfo = handleUploadImage();
-		const createProd = await createProduct(result.data);
-
-		if (createProd?.errors) {
-			createProd.errors.forEach((issue) => {
-				toast.error(issue.message);
-			});
-		}
-		toast.success('Product created successfully');
-		router.push('/admin/products');
-		// } catch (error) {
-		// 	console.log(error);
-		// }
-	};
-
-	const handleUploadImage = async () => {
-		const imageData = new FormData();
-		imageData.append('file', imageProd);
+		console.log(result.data);
 
 		try {
-			const res = await axios.post('/api/uploadImage', imageData);
-
-			if (res.status !== 200) {
-				toast.error('Error uploading image');
+			const createProd = await createProduct(result.data);
+			if (createProd?.errors) {
+				createProd.errors.forEach((issue) => {
+					toast.error(issue.message);
+				});
 				return;
 			}
 
-			return res.data;
+			toast.success('Product created successfully');
+			router.push('/admin/products');
 		} catch (error) {
-			console.error(error);
+			console.log(error);
+			toast.error('Error creating product');
 		}
 	};
+
+	// const handleUploadImage = async (image: File) => {
+	// 	if (!image) return;
+
+	// 	try {
+	// 		const imageData = new FormData();
+	// 		imageData.append('file', image);
+	// 		const { data } = await axios.post('/api/images', imageData);
+
+	// 		if (!data.success) {
+	// 			toast.error('Error uploading image');
+	// 			return;
+	// 		}
+
+	// 		console.log(data);
+
+	// 		return data;
+	// 	} catch (error) {
+	// 		console.error(error);
+	// 	}
+	// };
 
 	return (
 		<form

@@ -1,3 +1,4 @@
+import { Image } from '@/src/types/CloudflareImages';
 import { OrderItem } from '@/src/types/OrderItem';
 import { Product } from '@prisma/client';
 import { create } from 'zustand';
@@ -9,15 +10,15 @@ interface GlobalStore {
 	decreaseQuantity: (id: Product['id']) => void;
 	removeItem: (id: Product['id']) => void;
 	clearOrder: () => void;
-	imageProd: File | null;
-	setImageProd: (file: File) => void;
+	images: Image[];
+	setImages: (images: Image[]) => void;
 }
 
 export const useGlobalStore = create<GlobalStore>((set, get) => ({
 	order: [],
-	imageProd: null,
-	setImageProd: (file) => {
-		set(() => ({ imageProd: file }));
+	images: [],
+	setImages: (images) => {
+		set(() => ({ images }));
 	},
 	addToCart: (product) => {
 		const { categoryId, image, ...rest } = product;
