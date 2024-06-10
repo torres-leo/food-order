@@ -4,6 +4,7 @@ import FloatingInput from '../ui/FloatingInput';
 import DropdownCategory from './DropdownCategory';
 import { useState } from 'react';
 import Image from 'next/image';
+import { useGlobalStore } from '@/store/global';
 
 type ProductFormProps = {
 	categories: { id: number; name: string }[];
@@ -11,6 +12,7 @@ type ProductFormProps = {
 
 export default function ProductForm({ categories }: ProductFormProps) {
 	const [imageProd, setImageProd] = useState<string>('');
+	const { setImageProduct } = useGlobalStore();
 
 	return (
 		<div className='flex flex-col gap-y-6 text-white'>
@@ -29,8 +31,10 @@ export default function ProductForm({ categories }: ProductFormProps) {
 
 					if (file) {
 						setImageProd(URL.createObjectURL(file));
+						setImageProduct(file.name);
 					} else {
 						setImageProd('');
+						setImageProduct('');
 					}
 				}}
 			/>

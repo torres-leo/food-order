@@ -12,7 +12,17 @@ export async function createProduct(data: unknown) {
 		};
 	}
 
-	await prisma.product.create({
-		data: result.data,
-	});
+	try {
+		await prisma.product.create({
+			data: {
+				name: result.data.name,
+				price: result.data.price,
+				categoryId: result.data.categoryId,
+				imageId: result.data.imageId,
+				image_name: result.data.name.replaceAll(' ', '_').replaceAll('-', '').toLowerCase(),
+			},
+		});
+	} catch (error) {
+		console.log(error);
+	}
 }

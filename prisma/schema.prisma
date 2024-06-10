@@ -17,12 +17,11 @@ model Category {
 model Product {
   id         Int             @id @default(autoincrement())
   categoryId Int
-  imageId    Int?
+  imageId    String?
   image_name String
   name       String
   price      Float
   category   Category        @relation(fields: [categoryId], references: [id])
-  image      Image?          @relation(fields: [imageId], references: [id])
   orderItems OrderProducts[]
 }
 
@@ -43,11 +42,4 @@ model OrderProducts {
   quantity  Int
   order     Order   @relation(fields: [orderId], references: [id])
   product   Product @relation(fields: [productId], references: [id])
-}
-
-model Image {
-  id       Int       @id @default(autoincrement())
-  file     String
-  fileName String
-  products Product[]
 }

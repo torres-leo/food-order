@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import { ProductSchema } from '@/src/validator/productSchema';
 import { createProduct } from '@/src/lib/actions/create-product';
+import { useGlobalStore } from '@/store/global';
 
 type AddProductFormProps = {
 	children: React.ReactNode;
@@ -14,29 +15,18 @@ type AddProductFormProps = {
 
 export default function AddProductForm({ children, categories }: AddProductFormProps) {
 	const router = useRouter();
+	const { imageProduct, setImageProduct } = useGlobalStore();
 
 	const handleSubmit = async (formData: FormData) => {
 		const category = formData.get('category-id');
 		const catSelected = categories.find((cat) => cat.name === category);
+		const image = formData.get('file');
 
-		// if (!image) {
-		// 	toast.error('Please select an image');
-		// 	return;
-		// }
-
-		// const uploadImage = await handleUploadImage(image as File);
-		// console.log(uploadImage);
-
-		// if (!uploadImage) {
-		// 	toast.error('');
-		// 	return;
-		// }
-
-		const data = {
+		let data = {
 			name: formData.get('product-name') as string,
 			price: formData.get('product-price'),
 			categoryId: category ? catSelected?.id : '',
-			image: formData.get('file'),
+			imageId: imageProduct,
 		};
 
 		const result = ProductSchema.safeParse(data);
@@ -49,10 +39,25 @@ export default function AddProductForm({ children, categories }: AddProductFormP
 			return;
 		}
 
-		console.log(result.data);
+		const uploadImage = await handleUploadImage(image as File);
+
+		data = {
+			...data,
+			imageId: uploadImage.data.id,
+		};
+
+		const resultWithIdImage = ProductSchema.safeParse(data);
+
+		if (!resultWithIdImage.success) {
+			resultWithIdImage.error.issues.forEach((issue) => {
+				toast.error(issue.message);
+			});
+
+			return;
+		}
 
 		try {
-			const createProd = await createProduct(result.data);
+			const createProd = await createProduct(resultWithIdImage.data);
 			if (createProd?.errors) {
 				createProd.errors.forEach((issue) => {
 					toast.error(issue.message);
@@ -60,6 +65,7 @@ export default function AddProductForm({ children, categories }: AddProductFormP
 				return;
 			}
 
+			setImageProduct('');
 			toast.success('Product created successfully');
 			router.push('/admin/products');
 		} catch (error) {
@@ -68,26 +74,24 @@ export default function AddProductForm({ children, categories }: AddProductFormP
 		}
 	};
 
-	// const handleUploadImage = async (image: File) => {
-	// 	if (!image) return;
+	const handleUploadImage = async (image: File) => {
+		if (!image) return new Error('No image selected');
 
-	// 	try {
-	// 		const imageData = new FormData();
-	// 		imageData.append('file', image);
-	// 		const { data } = await axios.post('/api/images', imageData);
+		try {
+			const imageData = new FormData();
+			imageData.append('file', image);
+			const { data } = await axios.post('/api/images', imageData);
 
-	// 		if (!data.success) {
-	// 			toast.error('Error uploading image');
-	// 			return;
-	// 		}
+			if (!data.success) {
+				toast.error('Error uploading image');
+				return;
+			}
 
-	// 		console.log(data);
-
-	// 		return data;
-	// 	} catch (error) {
-	// 		console.error(error);
-	// 	}
-	// };
+			return data;
+		} catch (error) {
+			console.error(error);
+		}
+	};
 
 	return (
 		<form

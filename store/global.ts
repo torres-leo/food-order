@@ -10,15 +10,15 @@ interface GlobalStore {
 	decreaseQuantity: (id: Product['id']) => void;
 	removeItem: (id: Product['id']) => void;
 	clearOrder: () => void;
-	images: Image[];
-	setImages: (images: Image[]) => void;
+	imageProduct: string;
+	setImageProduct: (image: string) => void;
 }
 
 export const useGlobalStore = create<GlobalStore>((set, get) => ({
 	order: [],
-	images: [],
-	setImages: (images) => {
-		set(() => ({ images }));
+	imageProduct: '',
+	setImageProduct: (image) => {
+		set(() => ({ imageProduct: image }));
 	},
 	addToCart: (product) => {
 		const { categoryId, image, ...rest } = product;

@@ -11,7 +11,7 @@ CREATE TABLE "Category" (
 CREATE TABLE "Product" (
     "id" SERIAL NOT NULL,
     "categoryId" INTEGER NOT NULL,
-    "imageId" INTEGER,
+    "imageId" TEXT,
     "image_name" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "price" DOUBLE PRECISION NOT NULL,
@@ -41,20 +41,8 @@ CREATE TABLE "OrderProducts" (
     CONSTRAINT "OrderProducts_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
-CREATE TABLE "Image" (
-    "id" SERIAL NOT NULL,
-    "file" TEXT NOT NULL,
-    "fileName" TEXT NOT NULL,
-
-    CONSTRAINT "Image_pkey" PRIMARY KEY ("id")
-);
-
 -- AddForeignKey
 ALTER TABLE "Product" ADD CONSTRAINT "Product_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Product" ADD CONSTRAINT "Product_imageId_fkey" FOREIGN KEY ("imageId") REFERENCES "Image"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "OrderProducts" ADD CONSTRAINT "OrderProducts_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES "Order"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

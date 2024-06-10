@@ -8,11 +8,11 @@ export async function GET() {
 			headers: {
 				'Content-Type': 'application/json',
 				Authorization: `Bearer ${process.env.CLOUDFLARE_TOKEN}`,
+				'X-Auth-Email': process.env.CLOUDFLARE_EMAIL,
 				'X-Auth-Key': process.env.CLOUDFLARE_KEY,
 			},
 		});
 
-		console.log(images.data.result);
 		return NextResponse.json({ data: images.data });
 	} catch (error) {
 		console.log(error);
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
 	const headers = {
 		'Content-Type': 'multipart/form-data',
 		Authorization: `Bearer ${process.env.CLOUDFLARE_TOKEN}`,
-		// 'X-Auth-Email': process.env.CLOUDFLARE_EMAIL,
+		'X-Auth-Email': process.env.CLOUDFLARE_EMAIL,
 		'X-Auth-Key': process.env.CLOUDFLARE_KEY,
 	};
 
