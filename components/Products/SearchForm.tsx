@@ -1,14 +1,11 @@
 'use client';
 
-import { toast } from 'react-toastify';
-import { redirect, useRouter, useParams } from 'next/navigation';
 import { searchProductSchema } from '@/src/validator/searchProduct';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 
 export default function SearchForm({ className }: { className?: string }) {
 	const router = useRouter();
-	const params = useParams();
-
-	console.log(params);
 
 	const handleSearchForm = (formData: FormData) => {
 		const data = {
@@ -25,7 +22,6 @@ export default function SearchForm({ className }: { className?: string }) {
 		}
 
 		router.push(`/admin/products/search?search=${data.search}`);
-		redirect(`/admin/products/search?search=${data.search}`);
 	};
 
 	return (

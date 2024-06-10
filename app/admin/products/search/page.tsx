@@ -1,5 +1,6 @@
 import ProductsTable from '@/components/Products/ProductsTable';
 import SearchForm from '@/components/Products/SearchForm';
+import AddProductLink from '@/components/admin/AddProductLink';
 import Heading from '@/components/ui/Heading';
 import { prisma } from '@/src/lib/prisma';
 
@@ -29,7 +30,7 @@ async function SearchProductPage({ searchParams }: SearchProductPageProps) {
 	const products = await searchProducts(searchParams.search);
 
 	const renderProducts = () => {
-		if (!products) {
+		if (!products.length) {
 			return (
 				<div className='flex h-1/2 items-center justify-center'>
 					<h2 className='text-center text-5xl font-semibold text-gray-400'>
@@ -44,17 +45,24 @@ async function SearchProductPage({ searchParams }: SearchProductPageProps) {
 		return <ProductsTable products={products} />;
 	};
 
+	const itemToSearch = searchParams.search ? (
+		<span className='block text-white text-2xl underline underline-offset-4'>Search: {searchParams.search}</span>
+	) : (
+		''
+	);
+
 	return (
 		<>
-			<Heading className='mb-10'>Results</Heading>
+			<Heading>Products</Heading>
 
-			<div className='flex flex-col gap-y-4 mb-6 w-2/3'>
-				<SearchForm />
-				{searchParams.search ? (
-					<span className='block text-white text-2xl underline underline-offset-4'>for: {searchParams.search}</span>
-				) : (
-					''
-				)}
+			<div className='flex flex-col gap-y-6 mb-6 w-full'>
+				<div className='flex items-center gap-x-3'>
+					<AddProductLink />
+
+					<SearchForm />
+				</div>
+
+				{itemToSearch}
 			</div>
 
 			{renderProducts()}

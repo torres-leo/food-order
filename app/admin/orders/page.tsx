@@ -39,7 +39,7 @@ export default async function page() {
 
 	return (
 		<>
-			<Heading className='mb-10'>Manage Orders</Heading>
+			<Heading>Manage Orders</Heading>
 
 			{renderOrders()}
 		</>

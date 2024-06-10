@@ -1,5 +1,11 @@
 import ToastNotify from '@/components/ui/ToastNotify';
 import AdminSidebar from '@/components/admin/Sidebar';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Fast Food - Admin',
+	description: 'Fast Food',
+};
 
 export default async function AdminLayout({
 	children,

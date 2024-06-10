@@ -1,10 +1,12 @@
+import { redirect } from 'next/navigation';
+
+import { prisma } from '@/src/lib/prisma';
+
+import AddProductLink from '@/components/admin/AddProductLink';
+import Heading from '@/components/ui/Heading';
 import Pagination from '@/components/Products/Pagination';
 import ProductsTable from '@/components/Products/ProductsTable';
 import SearchForm from '@/components/Products/SearchForm';
-import Heading from '@/components/ui/Heading';
-import { prisma } from '@/src/lib/prisma';
-import Link from 'next/link';
-import { redirect } from 'next/navigation';
 
 async function productCount() {
 	return await prisma.product.count();
@@ -42,14 +44,10 @@ export default async function ProductsPage({ searchParams }: { searchParams: { p
 
 	return (
 		<>
-			<Heading className='mb-10'>Manage Products</Heading>
+			<Heading>Manage Products</Heading>
 
 			<div className='mb-10 flex items-center gap-x-3 w-full'>
-				<Link
-					href={`/admin/products/add`}
-					className='block min-w-fit py-2 px-3 border-2 border-amber-400 rounded text-amber-300 hover:bg-amber-400 hover:text-white transition'>
-					<span className='font-semibold rounded-full text-base'>+</span> Add Product
-				</Link>
+				<AddProductLink />
 
 				<SearchForm />
 			</div>

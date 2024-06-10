@@ -1,0 +1,17 @@
+@layer components {
+	.input {
+		&-floating {
+			@apply block px-2.5 pb-2.5 pt-4 w-full text-sm bg-transparent rounded-lg border-gray-200  text-white focus:outline-none focus:ring-0 focus:border-amber-400 border-2;
+
+			&--label {
+				@apply absolute text-sm text-gray-300/70 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] px-2 start-1 transition-all capitalize;
+				@apply peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 peer-focus:bg-gray-200 peer-focus:rounded-full;
+				@apply rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto;
+			}
+		}
+
+		&-floating:not(:placeholder-shown) + .input-floating--label {
+			@apply bg-gray-200 text-black rounded-full;
+		}
+	}
+}

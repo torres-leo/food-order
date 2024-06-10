@@ -4,6 +4,8 @@ import { orderSchema } from '@/src/validator/schema';
 import { prisma } from '@/src/lib/prisma';
 
 export async function CreateOrder(data: unknown) {
+	console.log(data);
+
 	const result = orderSchema.safeParse(data);
 
 	if (!result.success) return { errors: result.error.issues };

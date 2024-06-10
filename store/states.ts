@@ -8,7 +8,7 @@ type StatesStore = {
 };
 
 export const useStatesStore = create<StatesStore>((set) => ({
-	orderSideBar: false,
+	orderSideBar: true,
 	handleOrderSideBar: () => set((state) => ({ orderSideBar: !state.orderSideBar })),
 	loading: false,
 	setLoading: (loading: boolean) => set({ loading }),
