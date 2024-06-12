@@ -8,9 +8,10 @@ type FloatingInputProps = {
 	label: string;
 	labelClassName?: string;
 	inputType: InputType;
+	defaultValue?: string | number;
 };
 
-const FloatingInput = ({ label, inputClassName, labelClassName, id, inputType }: FloatingInputProps) => {
+const FloatingInput = ({ label, inputClassName, labelClassName, id, inputType, defaultValue }: FloatingInputProps) => {
 	const handleInputNumber = (evt: React.KeyboardEvent<HTMLInputElement>) => {
 		if (inputType === 'number') {
 			if (['e', 'E', '+', '-'].includes(evt.key)) {
@@ -28,8 +29,9 @@ const FloatingInput = ({ label, inputClassName, labelClassName, id, inputType }:
 				className={`input-floating peer ${inputClassName}`}
 				placeholder=' '
 				onKeyDown={handleInputNumber}
+				defaultValue={defaultValue}
 			/>
-			<label htmlFor={id} className={`input-floating--label ${labelClassName}`}>
+			<label htmlFor={id} className={`input-floating--label ${labelClassName ? labelClassName : ''}`}>
 				{label}
 			</label>
 		</div>

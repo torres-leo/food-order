@@ -7,20 +7,25 @@ import axios from 'axios';
 import { ProductSchema } from '@/src/validator/productSchema';
 import { createProduct } from '@/src/lib/actions/create-product';
 import { useGlobalStore } from '@/store/global';
+import { Product } from '@prisma/client';
 
-type AddProductFormProps = {
+type EditProductFormProps = {
 	children: React.ReactNode;
 	categories: { id: number; name: string }[];
+	product: Product;
 };
 
-export default function AddProductForm({ children, categories }: AddProductFormProps) {
+export default function EditProductForm({ children, categories, product }: EditProductFormProps) {
 	const router = useRouter();
 	const { imageProduct, setImageProduct } = useGlobalStore();
+	console.log(product);
 
 	const handleSubmit = async (formData: FormData) => {
 		const category = formData.get('category-id');
 		const catSelected = categories.find((cat) => cat.name === category);
 		const image = formData.get('file');
+
+		console.log({ image, imageProduct });
 
 		let data = {
 			name: formData.get('product-name') as string,
@@ -28,6 +33,8 @@ export default function AddProductForm({ children, categories }: AddProductFormP
 			categoryId: category ? catSelected?.id : '',
 			imageId: imageProduct,
 		};
+
+		console.log(data);
 
 		const result = ProductSchema.safeParse(data);
 
@@ -39,12 +46,19 @@ export default function AddProductForm({ children, categories }: AddProductFormP
 			return;
 		}
 
-		const uploadImage = await handleUploadImage(image as File);
+		if (imageProduct !== product.imageId) {
+			const uploadImage = await handleUploadImage(image as File);
 
-		data = {
-			...data,
-			imageId: uploadImage.data.variants[0],
-		};
+			data = {
+				...data,
+				imageId: uploadImage.data.variants[0],
+			};
+		} else {
+			data = {
+				...data,
+				imageId: imageProduct,
+			};
+		}
 
 		const resultWithIdImage = ProductSchema.safeParse(data);
 
@@ -55,6 +69,10 @@ export default function AddProductForm({ children, categories }: AddProductFormP
 
 			return;
 		}
+
+		console.log(resultWithIdImage);
+
+		return;
 
 		try {
 			const createProd = await createProduct(resultWithIdImage.data);
@@ -101,7 +119,7 @@ export default function AddProductForm({ children, categories }: AddProductFormP
 
 			<input
 				type='submit'
-				value='save product'
+				value='update product'
 				className='border-2 border-green-500 rounded w-1/2 font-medium capitalize mx-auto py-2 hover:cursor-pointer hover:bg-green-500 hover:text-white transition-all duration-200 ease-in-out tracking-wide'
 			/>
 		</form>
