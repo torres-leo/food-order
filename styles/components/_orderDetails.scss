@@ -43,3 +43,7 @@
 		@apply ml-2 font-semibold text-yellow-500 underline underline-offset-4;
 	}
 }
+
+.update-orders {
+	@apply block min-w-fit py-2 px-3 border-2 font-semibold border-amber-400 rounded text-amber-300 hover:bg-amber-400 hover:text-black/80 transition hover:cursor-pointer;
+}
