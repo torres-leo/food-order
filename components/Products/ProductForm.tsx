@@ -20,7 +20,6 @@ export default function ProductForm({ categories, product }: ProductFormProps) {
 	useEffect(() => {
 		if (product) {
 			const image = getImagePath(product.imagePath);
-			console.log(image.split('/').pop()?.split('.')[0]);
 
 			setImageProd(image);
 
