@@ -18,8 +18,7 @@ export async function createProduct(data: unknown) {
 				name: result.data.name,
 				price: result.data.price,
 				categoryId: result.data.categoryId,
-				imageId: result.data.imageId,
-				image_name: result.data.name.replaceAll(' ', '_').replaceAll('-', '').toLowerCase(),
+				imagePath: result.data.imagePath,
 			},
 		});
 	} catch (error) {

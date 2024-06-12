@@ -2,10 +2,11 @@
 
 import FloatingInput from '../ui/FloatingInput';
 import DropdownCategory from './DropdownCategory';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useGlobalStore } from '@/store/global';
 import { Product } from '@prisma/client';
+import { getImagePath } from '@/src/utils/getImagePath';
 
 type ProductFormProps = {
 	categories: { id: number; name: string }[];
@@ -18,74 +19,21 @@ export default function ProductForm({ categories, product }: ProductFormProps) {
 
 	console.log(product);
 
-	// useEffect(() => {
-	// 	if (product?.imageId) {
-	// 		setImageProduct(product.imageId);
-	// 	} else if (product?.image_name) {
-	// 		setImageProduct(product.image_name);
-	// 	} else {
-	// 		setImageProduct('');
-	// 	}
-	// }, [product, setImageProduct]);
-
 	useEffect(() => {
 		if (product) {
-			setImageProd(product.imageId ?? `/images/products/${product.image_name}.webp`);
-			setImageProduct(product.imageId ?? product.image_name);
+			const image = getImagePath(product.imagePath);
+			console.log(image.split('/').pop()?.split('.')[0]);
+
+			// setImageProd(product.imagePath ?? `/images/products/${product.imagePath}.webp`);
+			setImageProd(image);
+
+			if (image.startsWith('/images/products')) {
+				setImageProduct(image.split('/').pop()?.split('.')[0] as string);
+			} else {
+				setImageProduct(image);
+			}
 		}
-	}, []);
-
-	// const renderImageProduct = () => {
-	// 	// if (imageProd) return;
-
-	// 	if (product?.imageId) {
-	// 		return (
-	// 			<>
-	// 				<div className='relative w-1/2 mx-auto h-60 rounded-md'>
-	// 					<Image
-	// 						fill
-	// 						src={product.imageId}
-	// 						alt={`product ${product.name}`}
-	// 						sizes='100'
-	// 						quality={85}
-	// 						className='rounded-md'
-	// 					/>
-	// 					<Image
-	// 						fill
-	// 						src={product.imageId}
-	// 						alt={`product ${product.name}`}
-	// 						sizes='100'
-	// 						quality={85}
-	// 						className='rounded-md blur-sm -z-10'
-	// 					/>
-	// 				</div>
-	// 			</>
-	// 		);
-	// 	} else if (product?.image_name) {
-	// 		return (
-	// 			<>
-	// 				<div className='relative w-1/2 mx-auto h-60 rounded-md'>
-	// 					<Image
-	// 						fill
-	// 						src={`/images/products/${product.image_name}.webp`}
-	// 						alt={`product ${product.name}`}
-	// 						sizes='100'
-	// 						quality={85}
-	// 						className='rounded-md'
-	// 					/>
-	// 					<Image
-	// 						fill
-	// 						src={`/images/products/${product.image_name}.webp`}
-	// 						alt={`product ${product.name}`}
-	// 						sizes='100'
-	// 						quality={85}
-	// 						className='rounded-md blur-sm -z-10'
-	// 					/>
-	// 				</div>
-	// 			</>
-	// 		);
-	// 	}
-	// };
+	}, [product]);
 
 	return (
 		<div className='flex flex-col gap-y-6 text-white'>
@@ -102,17 +50,11 @@ export default function ProductForm({ categories, product }: ProductFormProps) {
 				onChange={(e) => {
 					const file = e.target.files?.[0];
 
-					if (!file && product?.imageId) return setImageProduct(product.imageId);
-					else if (!file && product?.image_name && product.imageId === null) return setImageProduct(product.image_name);
-					else if (file && (!product?.imageId || !product?.image_name)) {
+					if (!file && product?.imagePath) return setImageProduct(product.imagePath);
+					else if (file) {
 						setImageProd(URL.createObjectURL(file));
 						setImageProduct(file.name);
 					}
-
-					// if (file) {
-					// 	setImageProd(URL.createObjectURL(file));
-					// 	setImageProduct(file.name);
-					// }
 				}}
 			/>
 
@@ -132,8 +74,6 @@ export default function ProductForm({ categories, product }: ProductFormProps) {
 					/>
 				</div>
 			)}
-
-			{/* {renderImageProduct()} */}
 		</div>
 	);
 }

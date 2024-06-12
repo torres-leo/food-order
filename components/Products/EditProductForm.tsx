@@ -5,9 +5,9 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
 import { ProductSchema } from '@/src/validator/productSchema';
-import { createProduct } from '@/src/lib/actions/create-product';
 import { useGlobalStore } from '@/store/global';
 import { Product } from '@prisma/client';
+import { updateProduct } from '@/src/lib/actions/update-product';
 
 type EditProductFormProps = {
 	children: React.ReactNode;
@@ -18,23 +18,18 @@ type EditProductFormProps = {
 export default function EditProductForm({ children, categories, product }: EditProductFormProps) {
 	const router = useRouter();
 	const { imageProduct, setImageProduct } = useGlobalStore();
-	console.log(product);
 
 	const handleSubmit = async (formData: FormData) => {
 		const category = formData.get('category-id');
 		const catSelected = categories.find((cat) => cat.name === category);
 		const image = formData.get('file');
 
-		console.log({ image, imageProduct });
-
 		let data = {
 			name: formData.get('product-name') as string,
 			price: formData.get('product-price'),
 			categoryId: category ? catSelected?.id : '',
-			imageId: imageProduct,
+			imagePath: imageProduct,
 		};
-
-		console.log(data);
 
 		const result = ProductSchema.safeParse(data);
 
@@ -46,17 +41,17 @@ export default function EditProductForm({ children, categories, product }: EditP
 			return;
 		}
 
-		if (imageProduct !== product.imageId) {
+		if (imageProduct !== product.imagePath) {
 			const uploadImage = await handleUploadImage(image as File);
 
 			data = {
 				...data,
-				imageId: uploadImage.data.variants[0],
+				imagePath: uploadImage.data.variants[0],
 			};
 		} else {
 			data = {
 				...data,
-				imageId: imageProduct,
+				imagePath: imageProduct,
 			};
 		}
 
@@ -70,12 +65,8 @@ export default function EditProductForm({ children, categories, product }: EditP
 			return;
 		}
 
-		console.log(resultWithIdImage);
-
-		return;
-
 		try {
-			const createProd = await createProduct(resultWithIdImage.data);
+			const createProd = await updateProduct(resultWithIdImage.data, product.id);
 			if (createProd?.errors) {
 				createProd.errors.forEach((issue) => {
 					toast.error(issue.message);
@@ -84,7 +75,7 @@ export default function EditProductForm({ children, categories, product }: EditP
 			}
 
 			setImageProduct('');
-			toast.success('Product created successfully');
+			toast.success('Product updated');
 			router.push('/admin/products');
 		} catch (error) {
 			console.log(error);

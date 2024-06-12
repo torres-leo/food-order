@@ -3,25 +3,19 @@ import Image from 'next/image';
 
 import { formatCurrency } from '@/src/utils/formatCurrency';
 import AddProductButton from './AddProductButton';
-import PhotoIcon from '../Icons/PhotoIcon';
+import { getImagePath } from '@/src/utils/getImagePath';
 
 type ProductCardProps = {
 	product: Product;
 };
 
 function ProductCard({ product }: ProductCardProps) {
-	const { name, price, imageId, image_name } = product;
+	const { name, price, imagePath } = product;
 
 	const renderImageProduct = () => {
-		if (imageId) {
-			return <Image fill src={imageId} alt={`product ${name}`} sizes='100' quality={85} />;
-		} else if (image_name) {
-			return (
-				<Image fill src={`/images/products/${image_name}.webp`} alt={`product ${name}`} sizes='100' quality={85} />
-			);
-		} else {
-			return <PhotoIcon className='size-full' />;
-		}
+		const image = getImagePath(imagePath);
+
+		return <Image fill src={image} alt={`product ${name}`} sizes='100' quality={85} />;
 	};
 
 	return (

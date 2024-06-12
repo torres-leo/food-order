@@ -11,8 +11,7 @@ CREATE TABLE "Category" (
 CREATE TABLE "Product" (
     "id" SERIAL NOT NULL,
     "categoryId" INTEGER NOT NULL,
-    "imageId" TEXT,
-    "image_name" TEXT NOT NULL,
+    "imagePath" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "price" DOUBLE PRECISION NOT NULL,
 

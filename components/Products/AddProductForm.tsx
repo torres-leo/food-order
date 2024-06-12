@@ -26,7 +26,7 @@ export default function AddProductForm({ children, categories }: AddProductFormP
 			name: formData.get('product-name') as string,
 			price: formData.get('product-price'),
 			categoryId: category ? catSelected?.id : '',
-			imageId: imageProduct,
+			imagePath: imageProduct,
 		};
 
 		const result = ProductSchema.safeParse(data);
@@ -43,7 +43,7 @@ export default function AddProductForm({ children, categories }: AddProductFormP
 
 		data = {
 			...data,
-			imageId: uploadImage.data.variants[0],
+			imagePath: uploadImage.data.variants[0],
 		};
 
 		const resultWithIdImage = ProductSchema.safeParse(data);
