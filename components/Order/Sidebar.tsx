@@ -1,7 +1,6 @@
 'use client';
 import { Category } from '@prisma/client';
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 
 import { getCategories } from '@/src/utils/getCategories';
 

@@ -15,7 +15,7 @@ export default function ProductsTable({ products }: ProductsTableProps) {
 			<td className='productsTable__body--col'>{formatCurrency(product.price)}</td>
 			<td className='productsTable__body--col'>{product.category.name}</td>
 			<td className='relative productsTable__body--col'>
-				<Link className='productsTable__edit' href={`admin/products/${product.id}/edit`}>
+				<Link className='productsTable__edit' href={`products/${product.id}/edit`}>
 					Edit <span className='sr-only'>,{product.name}</span>
 				</Link>
 			</td>

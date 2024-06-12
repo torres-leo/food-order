@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Select from 'react-dropdown-select';
 
 type Option = {
@@ -12,10 +12,25 @@ type DropdownCategoryProps = {
 	placeholder: string;
 	className?: string;
 	color?: string;
+	defaultValue?: number;
 };
 
-export default function DropdownCategory({ options, placeholder, className, color }: DropdownCategoryProps) {
+export default function DropdownCategory({
+	options,
+	placeholder,
+	className,
+	color,
+	defaultValue,
+}: DropdownCategoryProps) {
 	const [selectedValues, setSelectedValues] = useState<Option[]>([]);
+
+	useEffect(() => {
+		if (defaultValue) {
+			const selected = options.filter((option) => option.id === defaultValue);
+
+			setSelectedValues(selected);
+		}
+	}, [defaultValue]);
 
 	const handleChange = (values: Option[]) => {
 		setSelectedValues(values);

@@ -2,8 +2,9 @@
 
 import { ProductSchema } from '@/src/validator/productSchema';
 import { prisma } from '../prisma';
+import { revalidatePath } from 'next/cache';
 
-export async function createProduct(data: unknown) {
+export async function updateProduct(data: unknown, id: number) {
 	const result = ProductSchema.safeParse(data);
 
 	if (!result.success) {
@@ -13,7 +14,10 @@ export async function createProduct(data: unknown) {
 	}
 
 	try {
-		await prisma.product.create({
+		await prisma.product.update({
+			where: {
+				id,
+			},
 			data: {
 				name: result.data.name,
 				price: result.data.price,
@@ -21,6 +25,8 @@ export async function createProduct(data: unknown) {
 				imagePath: result.data.imagePath,
 			},
 		});
+
+		revalidatePath('/admin/products');
 	} catch (error) {
 		console.log(error);
 	}

@@ -5,15 +5,17 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
 import { ProductSchema } from '@/src/validator/productSchema';
-import { createProduct } from '@/src/lib/actions/create-product';
 import { useGlobalStore } from '@/store/global';
+import { Product } from '@prisma/client';
+import { updateProduct } from '@/src/lib/actions/update-product';
 
-type AddProductFormProps = {
+type EditProductFormProps = {
 	children: React.ReactNode;
 	categories: { id: number; name: string }[];
+	product: Product;
 };
 
-export default function AddProductForm({ children, categories }: AddProductFormProps) {
+export default function EditProductForm({ children, categories, product }: EditProductFormProps) {
 	const router = useRouter();
 	const { imageProduct, setImageProduct } = useGlobalStore();
 
@@ -39,12 +41,19 @@ export default function AddProductForm({ children, categories }: AddProductFormP
 			return;
 		}
 
-		const uploadImage = await handleUploadImage(image as File);
+		if (imageProduct !== product.imagePath) {
+			const uploadImage = await handleUploadImage(image as File);
 
-		data = {
-			...data,
-			imagePath: uploadImage.data.variants[0],
-		};
+			data = {
+				...data,
+				imagePath: uploadImage.data.variants[0],
+			};
+		} else {
+			data = {
+				...data,
+				imagePath: imageProduct,
+			};
+		}
 
 		const resultWithIdImage = ProductSchema.safeParse(data);
 
@@ -57,7 +66,7 @@ export default function AddProductForm({ children, categories }: AddProductFormP
 		}
 
 		try {
-			const createProd = await createProduct(resultWithIdImage.data);
+			const createProd = await updateProduct(resultWithIdImage.data, product.id);
 			if (createProd?.errors) {
 				createProd.errors.forEach((issue) => {
 					toast.error(issue.message);
@@ -66,7 +75,7 @@ export default function AddProductForm({ children, categories }: AddProductFormP
 			}
 
 			setImageProduct('');
-			toast.success('Product created successfully');
+			toast.success('Product updated');
 			router.push('/admin/products');
 		} catch (error) {
 			console.log(error);
@@ -101,7 +110,7 @@ export default function AddProductForm({ children, categories }: AddProductFormP
 
 			<input
 				type='submit'
-				value='save product'
+				value='update product'
 				className='border-2 border-green-500 rounded w-1/2 font-medium capitalize mx-auto py-2 hover:cursor-pointer hover:bg-green-500 hover:text-white transition-all duration-200 ease-in-out tracking-wide'
 			/>
 		</form>

@@ -2,25 +2,43 @@
 
 import FloatingInput from '../ui/FloatingInput';
 import DropdownCategory from './DropdownCategory';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useGlobalStore } from '@/store/global';
+import { Product } from '@prisma/client';
+import { getImagePath } from '@/src/utils/getImagePath';
 
 type ProductFormProps = {
 	categories: { id: number; name: string }[];
+	product?: Product;
 };
 
-export default function ProductForm({ categories }: ProductFormProps) {
+export default function ProductForm({ categories, product }: ProductFormProps) {
 	const [imageProd, setImageProd] = useState<string>('');
 	const { setImageProduct } = useGlobalStore();
 
+	useEffect(() => {
+		if (product) {
+			const image = getImagePath(product.imagePath);
+			console.log(image.split('/').pop()?.split('.')[0]);
+
+			setImageProd(image);
+
+			if (image.startsWith('/images/products')) {
+				setImageProduct(image.split('/').pop()?.split('.')[0] as string);
+			} else {
+				setImageProduct(image);
+			}
+		}
+	}, [product]);
+
 	return (
 		<div className='flex flex-col gap-y-6 text-white'>
-			<FloatingInput label='product name' id='product-name' inputType='text' />
+			<FloatingInput label='product name' id='product-name' inputType='text' defaultValue={product?.name} />
 
-			<FloatingInput label='price' id='product-price' inputType='number' />
+			<FloatingInput label='price' id='product-price' inputType='number' defaultValue={product?.price} />
 
-			<DropdownCategory options={categories} placeholder='Select Category...' />
+			<DropdownCategory options={categories} placeholder='Select Category...' defaultValue={product?.categoryId} />
 
 			<input
 				name='file'
@@ -29,19 +47,28 @@ export default function ProductForm({ categories }: ProductFormProps) {
 				onChange={(e) => {
 					const file = e.target.files?.[0];
 
-					if (file) {
+					if (!file && product?.imagePath) return setImageProduct(product.imagePath);
+					else if (file) {
 						setImageProd(URL.createObjectURL(file));
 						setImageProduct(file.name);
-					} else {
-						setImageProd('');
-						setImageProduct('');
 					}
 				}}
 			/>
 
 			{imageProd && (
-				<div className='relative w-1/2 mx-auto h-60'>
-					<Image src={imageProd} fill alt='image product' className='bg-cover bg-center bg-no-repeat rounded border' />
+				<div className='relative w-1/2 mx-auto h-60 rounded-md'>
+					<Image
+						src={imageProd}
+						fill
+						alt='image product'
+						className='bg-cover bg-center bg-no-repeat border rounded-md'
+					/>
+					<Image
+						src={imageProd}
+						fill
+						alt='image product'
+						className='bg-cover bg-center bg-no-repeat border rounded-md blur-sm -z-10 '
+					/>
 				</div>
 			)}
 		</div>
