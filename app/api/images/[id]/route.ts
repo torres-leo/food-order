@@ -10,8 +10,7 @@ export async function GET(_: NextRequest, { params }: { params: { id: string } }
 				'Content-Type': 'application/json',
 			},
 		});
-
-		console.log(image.data);
+		y;
 		return NextResponse.json({ data: image.data });
 	} catch (error) {
 		console.log(error);
