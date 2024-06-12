@@ -1,7 +1,7 @@
 import OrderCard from '@/components/Order/OrderCard';
 import Heading from '@/components/ui/Heading';
 import { prisma } from '@/src/lib/prisma';
-import { Order, OrderProducts } from '@prisma/client';
+import { revalidatePath } from 'next/cache';
 
 async function getPendingOrders() {
 	const orders = await prisma.order.findMany({
@@ -37,9 +37,19 @@ export default async function page() {
 		);
 	};
 
+	const refreshOrders = async () => {
+		'use server';
+
+		revalidatePath('/admin/orders');
+	};
+
 	return (
 		<>
 			<Heading>Manage Orders</Heading>
+
+			<form action={refreshOrders}>
+				<input type='submit' value='Update Orders' className='update-orders' />
+			</form>
 
 			{renderOrders()}
 		</>
