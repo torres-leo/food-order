@@ -17,14 +17,11 @@ export default function ProductForm({ categories, product }: ProductFormProps) {
 	const [imageProd, setImageProd] = useState<string>('');
 	const { setImageProduct } = useGlobalStore();
 
-	console.log(product);
-
 	useEffect(() => {
 		if (product) {
 			const image = getImagePath(product.imagePath);
 			console.log(image.split('/').pop()?.split('.')[0]);
 
-			// setImageProd(product.imagePath ?? `/images/products/${product.imagePath}.webp`);
 			setImageProd(image);
 
 			if (image.startsWith('/images/products')) {
