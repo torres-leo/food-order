@@ -39,7 +39,7 @@ export default function OrdersStatus() {
 					})}
 				</div>
 			) : (
-				<h3>No Orders Ready</h3>
+				<h3 className='text-white text-center text-2xl font-semibold'>There are no orders ready</h3>
 			)}
 		</section>
 	);
