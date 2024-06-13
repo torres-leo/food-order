@@ -114,7 +114,7 @@ function OrderSummary() {
 				<AnimatePresence>
 					<LazyMotion features={domAnimation} key='panel'>
 						<motion.aside
-							className='md:w-2/5 lg:w-96 2xl:max-w-[450px] 2xl:w-full p-5 pl-3 bg-white/10 sb-g overflow-y-auto scrollbar lg:h-screen max-h-dvh'
+							className='md:w-2/5 md:max-h-[85vh] lg:w-96 2xl:max-w-[450px] 2xl:w-full p-5 pl-3 bg-white/10 sb-g overflow-y-auto scrollbar lg:h-screen'
 							{...motionOptions}>
 							<h1 className='text-center font-bold text-4xl tracking-wide border-b-2 pb-2 mb-8 border-white/20 text-yellow-500'>
 								My Order
