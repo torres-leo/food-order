@@ -26,7 +26,9 @@ export default async function page() {
 	const orders = await getPendingOrders();
 
 	const renderOrders = () => {
-		if (!orders.length) return;
+		if (!orders.length) {
+			return <h3 className='text-white text-center text-2xl font-semibold'>There are no orders</h3>;
+		}
 
 		return (
 			<div className='grid grid-cols-[repeat(auto-fill,minmax(200px,500px))] gap-5 place-content-center'>
