@@ -13,7 +13,7 @@ export default function Pagination({ page, totalPages }: PaginationProps) {
 			key={currentPage}
 			href={`/admin/products?page=${currentPage}`}
 			className={`px-2 py-1 border hover:bg-white/10 transition ${
-				page === currentPage && 'bg-amber-400 text-black font-medium'
+				page === currentPage ? 'bg-amber-400 text-black font-medium hover:bg-amber-400' : ''
 			}`}>
 			{currentPage}
 		</Link>
@@ -24,19 +24,19 @@ export default function Pagination({ page, totalPages }: PaginationProps) {
 			{page >= 1 && (
 				<Link
 					href={`/admin/products?page=${page - 1}`}
-					className={`px-2 py-1 border-t border-l border-b rounded rounded-e-none hover:bg-white/15 ${
+					className={`text-white px-2 py-1 border-t border-l border-b rounded rounded-e-none hover:bg-white/15 ${
 						page === 1 ? 'opacity-50 pointer-events-none' : ''
 					}`}>
 					&laquo;
 				</Link>
 			)}
 
-			<div className='flex'>{renderNumberPages}</div>
+			<div className='flex text-white'>{renderNumberPages}</div>
 
 			{page <= totalPages && (
 				<Link
 					href={`/admin/products?page=${page + 1}`}
-					className={`px-2 py-1 border-t border-r border-b rounded rounded-s-none hover:bg-white/15 ${
+					className={` text-white px-2 py-1 border-t border-r border-b rounded rounded-s-none hover:bg-white/15 ${
 						page === totalPages ? 'opacity-50 pointer-events-none' : ''
 					}`}>
 					&raquo;

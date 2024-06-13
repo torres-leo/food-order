@@ -57,8 +57,8 @@ function OrderSummary() {
 
 	const renderEmptyOrderMessage = (
 		<div className='flex flex-col items-center justify-center h-[calc(100%-82px)]'>
-			<h1 className='text-3xl font-bold text-center'>Your order is empty</h1>
-			<p className='text-lg text-center'>Add some items to your order</p>
+			<h1 className='text-3xl font-bold text-center text-white'>Your order is empty</h1>
+			<p className='text-lg text-center text-white'>Add some items to your order</p>
 		</div>
 	);
 
@@ -76,7 +76,7 @@ function OrderSummary() {
 		}
 
 		return (
-			<p className='my-10 font-bold text-4xl flex items-center'>
+			<p className='my-10 font-bold text-4xl flex items-center text-white'>
 				Total:
 				<span className='font-semibold text-amber-400 underline underline-offset-8 border-b-4 pb-2 border-amber-400 max-w-fit flex-1 mx-auto text-3xl'>
 					{formatCurrency(total)}
@@ -95,13 +95,13 @@ function OrderSummary() {
 				<input
 					type='text'
 					placeholder='Type your name for the order..'
-					className=' border rounded border-gray-500 p-2.5 w-full mb-5 outline-none text-sm tracking-wide font-light'
+					className='bg-black text-white border rounded border-gray-500 p-2.5 w-full mb-5 outline-none text-sm tracking-wide font-light'
 					name='name'
 				/>
 
 				<input
 					type='submit'
-					className='rounded uppercase bg-green-500 w-full text-center py-2 font-bold cursor-pointer hover:bg-green-600 transition-colors duration-300 tracking-wider'
+					className='text-white rounded uppercase bg-green-500 w-full text-center py-2 font-bold cursor-pointer hover:bg-green-600 transition-colors duration-300 tracking-wider'
 					value='Confirm Order'
 				/>
 			</form>

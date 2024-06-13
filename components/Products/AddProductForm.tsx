@@ -96,13 +96,13 @@ export default function AddProductForm({ children, categories }: AddProductFormP
 	return (
 		<form
 			action={handleSubmit}
-			className='flex flex-col gap-y-6 max-w-[700px] w-full mx-auto border bg-white/10 py-5 px-10 rounded'>
+			className='flex flex-col gap-y-6 max-w-[700px] w-full mx-auto border bg-white/10 py-5 px-10 rounded mb-10'>
 			{children}
 
 			<input
 				type='submit'
 				value='save product'
-				className='border-2 border-green-500 rounded w-1/2 font-medium capitalize mx-auto py-2 hover:cursor-pointer hover:bg-green-500 hover:text-white transition-all duration-200 ease-in-out tracking-wide'
+				className=' text-white border-2 border-green-500 rounded w-1/2 font-medium capitalize mx-auto py-2 hover:cursor-pointer hover:bg-green-500 hover:text-white transition-all duration-200 ease-in-out tracking-wide'
 			/>
 		</form>
 	);
