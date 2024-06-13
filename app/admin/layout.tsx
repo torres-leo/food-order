@@ -3,8 +3,8 @@ import AdminSidebar from '@/components/admin/Sidebar';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-	title: 'Fast Food - Admin',
-	description: 'Fast Food',
+	title: 'Food Order - Admin',
+	description: 'Food Order',
 };
 
 export default async function AdminLayout({
