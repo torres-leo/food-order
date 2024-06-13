@@ -7,6 +7,7 @@ import axios from 'axios';
 import { ProductSchema } from '@/src/validator/productSchema';
 import { createProduct } from '@/src/lib/actions/create-product';
 import { useGlobalStore } from '@/store/global';
+import { useState } from 'react';
 
 type AddProductFormProps = {
 	children: React.ReactNode;
@@ -15,6 +16,7 @@ type AddProductFormProps = {
 
 export default function AddProductForm({ children, categories }: AddProductFormProps) {
 	const router = useRouter();
+	const [counterClick, setCounterClick] = useState<number>(0);
 	const { imageProduct, setImageProduct } = useGlobalStore();
 
 	const handleSubmit = async (formData: FormData) => {
@@ -66,6 +68,7 @@ export default function AddProductForm({ children, categories }: AddProductFormP
 			}
 
 			setImageProduct('');
+			setCounterClick(0);
 			toast.success('Product created successfully');
 			router.push('/admin/products');
 		} catch (error) {
@@ -103,6 +106,10 @@ export default function AddProductForm({ children, categories }: AddProductFormP
 				type='submit'
 				value='save product'
 				className='border-2 border-green-500 rounded w-1/2 font-medium capitalize mx-auto py-2 hover:cursor-pointer hover:bg-green-500 hover:text-white transition-all duration-200 ease-in-out tracking-wide'
+				disabled={counterClick > 0}
+				onClick={() => {
+					setCounterClick((prev) => prev + 1);
+				}}
 			/>
 		</form>
 	);

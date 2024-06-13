@@ -44,14 +44,14 @@ export default async function page() {
 	};
 
 	return (
-		<>
+		<section className='max-w-[1200px] w-full mx-auto px-10'>
 			<Heading>Manage Orders</Heading>
 
-			<form action={refreshOrders}>
+			<form action={refreshOrders} className='mb-10'>
 				<input type='submit' value='Update Orders' className='update-orders' />
 			</form>
 
 			{renderOrders()}
-		</>
+		</section>
 	);
 }

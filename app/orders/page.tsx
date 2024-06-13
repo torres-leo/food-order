@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 'use client';
 
 import useSWR from 'swr';
@@ -16,7 +17,7 @@ export default function OrdersStatus() {
 			.then((res) => res.json())
 			.then((data) => data);
 
-	const { data, _, isLoading } = useSWR<UserOrder[]>(url, fetcher, {
+	const { data, error, isLoading } = useSWR<UserOrder[]>(url, fetcher, {
 		refreshInterval: 60000,
 		revalidateOnFocus: false,
 	});

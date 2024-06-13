@@ -30,7 +30,7 @@ export default function DropdownCategory({
 
 			setSelectedValues(selected);
 		}
-	}, [defaultValue]);
+	}, [defaultValue, options]);
 
 	const handleChange = (values: Option[]) => {
 		setSelectedValues(values);

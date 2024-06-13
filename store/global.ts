@@ -1,4 +1,3 @@
-import { Image } from '@/src/types/CloudflareImages';
 import { OrderItem } from '@/src/types/OrderItem';
 import { Product } from '@prisma/client';
 import { create } from 'zustand';
@@ -21,7 +20,7 @@ export const useGlobalStore = create<GlobalStore>((set, get) => ({
 		set(() => ({ imageProduct: image }));
 	},
 	addToCart: (product) => {
-		const { categoryId, image, ...rest } = product;
+		const { categoryId, imagePath, ...rest } = product;
 		let items: OrderItem[] = [];
 
 		const productExists = get().order.find((item) => item.id === product.id);

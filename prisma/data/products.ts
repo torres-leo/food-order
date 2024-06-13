@@ -186,7 +186,7 @@ export const products = [
 		categoryId: 6,
 	},
 	{
-		name: 'Vanilla Muffins Pack',
+		name: 'Vanilla Cookies Pack',
 		price: 24.9,
 		imagePath: 'galletas_04',
 		categoryId: 6,
