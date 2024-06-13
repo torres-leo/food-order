@@ -4,8 +4,8 @@ import ToastNotify from '@/components/ui/ToastNotify';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-	title: 'Fast Food - Products',
-	description: 'Fast Food',
+	title: 'Food Order - Products',
+	description: 'Food Order',
 };
 
 export default function OrderLayout({

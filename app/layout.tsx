@@ -5,8 +5,8 @@ import './globals.scss';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-	title: 'Fast Food',
-	description: 'Fast Food',
+	title: 'Food Order',
+	description: 'Food Order',
 };
 
 export default function RootLayout({
