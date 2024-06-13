@@ -66,7 +66,6 @@ export default function AddProductForm({ children, categories }: AddProductFormP
 			}
 
 			setImageProduct('');
-			setCounterClick(0);
 			toast.success('Product created successfully');
 			router.push('/admin/products');
 		} catch (error) {
