@@ -19,7 +19,7 @@ function CategoryItem({ category }: CategoryIconProps) {
 			<picture className='size-10 relative'>
 				<Image src={`/images/icon_${category.slug}.svg`} alt='category icon' fill />
 			</picture>
-			<p>{category.name}</p>
+			<p className='text-white'>{category.name}</p>
 		</Link>
 	);
 }

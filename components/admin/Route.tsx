@@ -41,7 +41,7 @@ const AdminRoute = ({ link }: AdminRouteProps) => {
 			key={link.url}
 			href={link.url}
 			target={link.blank ? '_blank' : '_self'}
-			className={`flex items-center gap-3 w-full border-t border-white/10 p-2 h-16 last-of-type:border-b hover:bg-white/15 hover:cursor-pointer select-none ${
+			className={`flex text-white items-center gap-3 w-full border-t border-white/10 p-2 h-16 last-of-type:border-b hover:bg-white/15 hover:cursor-pointer select-none ${
 				isActive ? 'bg-amber-400 text-black font-bold hover:bg-amber-400' : ''
 			} `}>
 			{renderIcon(link.icon)}

@@ -39,7 +39,7 @@ const OrderDetails = ({ product }: OrderDetailsProps) => {
 							-
 						</button>
 
-						<p className='text-lg font-semibold'>{product.quantity}</p>
+						<p className='text-lg font-semibold text-white'>{product.quantity}</p>
 
 						<button
 							className='order-details__button--increase'
@@ -57,7 +57,7 @@ const OrderDetails = ({ product }: OrderDetailsProps) => {
 					)}
 				</div>
 
-				<p className='text-xl md:text-lg lg:text-xl font-semibold '>
+				<p className='text-xl md:text-lg lg:text-xl font-semibold text-white'>
 					Subtotal:
 					<span className='order-details__subtotal'>{formatCurrency(product.subtotal)}</span>
 				</p>

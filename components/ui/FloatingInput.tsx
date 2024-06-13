@@ -29,7 +29,9 @@ const FloatingInput = ({ label, inputClassName, labelClassName, id, inputType, d
 				className={`input-floating peer ${inputClassName}`}
 				placeholder=' '
 				onKeyDown={handleInputNumber}
-				defaultValue={defaultValue}
+				// defaultValue={defaultValue}
+				defaultValue={defaultValue ? defaultValue : ''}
+				step={inputType === 'number' ? '0.01' : ''}
 			/>
 			<label htmlFor={id} className={`input-floating--label ${labelClassName ? labelClassName : ''}`}>
 				{label}

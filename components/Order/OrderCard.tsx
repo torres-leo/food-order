@@ -10,7 +10,7 @@ type OrderCardProps = {
 
 export default function OrderCard({ order }: OrderCardProps) {
 	const renderBodyTable = order.orderProducts.map((product) => (
-		<tbody key={product.productId} className='border-b border-gray-200/20 last:border-none'>
+		<tbody key={product.productId} className='border-b border-gray-200/20 last:border-none text-white'>
 			<tr className=''>
 				<td className='text-sm py-1.5 font-semibold'>({product.quantity})</td>
 				<td className='text-sm py-1.5 font-semibold'>{product.product.name}</td>
@@ -62,7 +62,7 @@ export default function OrderCard({ order }: OrderCardProps) {
 	);
 
 	return (
-		<article className='rounded-lg bg-transparent px-4 py-6 sm:p-6  lg:mt-0 lg:p-8 border border-white/10 shadow-inner shadow-white/15'>
+		<article className='rounded-lg bg-transparent px-4 py-6 sm:p-6  lg:mt-0 lg:p-8 border border-white/10 shadow-inner shadow-white/15 text-white'>
 			<p className='text-lg font-medium mb-5'>
 				Client:
 				<span className='text-xl ml-3'>{order.name}</span>

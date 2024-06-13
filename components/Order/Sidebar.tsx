@@ -32,7 +32,7 @@ export default function OrderSidebar() {
 		<aside className='aside flex flex-col justify-between'>
 			<div>
 				<Logo redirect='order/coffee' />
-				<p className='mb-6 text-center font-semibold text-xl select-none'>Categories</p>
+				<p className='mb-6 text-center font-semibold text-white text-xl select-none'>Categories</p>
 				<nav>{renderCategories}</nav>
 			</div>
 
