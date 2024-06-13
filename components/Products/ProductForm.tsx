@@ -29,7 +29,7 @@ export default function ProductForm({ categories, product }: ProductFormProps) {
 				setImageProduct(image);
 			}
 		}
-	}, [product]);
+	}, [product, setImageProduct]);
 
 	return (
 		<div className='flex flex-col gap-y-6 text-white'>

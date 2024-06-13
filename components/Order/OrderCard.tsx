@@ -1,6 +1,6 @@
 import { completeOrder } from '@/src/lib/actions/complete-order';
 import { formatCurrency } from '@/src/utils/formatCurrency';
-import { UserOrder } from '@/src/types/userOrder';
+import { UserOrder } from '@/src/types/UserOrder';
 import TrashIcon from '../Icons/TrashIcon';
 import CheckIcon from '../Icons/CheckIcon';
 
