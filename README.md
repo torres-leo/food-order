@@ -29,3 +29,5 @@ These commands are useful tools for managing and interacting with your database 
 `npx prisma db seed`: This command is used to seed your database with initial data. Seeding is the process of populating your database with predefined data that you can use for testing or to initialize your application with some default data. When you run npx prisma db seed, Prisma executes the seed script defined in your Prisma schema file (schema.prisma) if you have defined any. This script typically contains instructions to insert specific data into your database tables.
 
 `npx prisma studio`: This command launches Prisma Studio, which is a graphical user interface (GUI) tool provided by Prisma for interacting with your database. Prisma Studio allows you to view and manage your database data visually. You can browse through your tables, view individual records, make changes to the data, and perform other database-related tasks. It provides a convenient way to inspect and manipulate your database without having to write SQL queries manually.
+
+`npx prisma db push --force-reset && npx prisma db seed` To reset all data in the database
