@@ -1,4 +1,5 @@
 import { completeOrder } from '@/src/lib/actions/complete-order';
+import { cancelOrder } from '@/src/lib/actions/cancel-order';
 import { formatCurrency } from '@/src/utils/formatCurrency';
 import { UserOrder } from '@/src/types/UserOrder';
 import TrashIcon from '../Icons/TrashIcon';
@@ -26,7 +27,7 @@ export default function OrderCard({ order }: OrderCardProps) {
 		</div>
 	);
 
-	const confirmOrder = (
+	const btnConfirmOrder = (
 		<form action={completeOrder} className='w-full'>
 			<div className='flex flex-nowrap items-center rounded transition border border-green-500 hover:bg-green-600 hover:border-white w-full justify-center'>
 				<input type='hidden' value={order.id} name='order_id' />
@@ -44,9 +45,11 @@ export default function OrderCard({ order }: OrderCardProps) {
 		</form>
 	);
 
-	const cancelOrder = (
-		<form action='' className='w-1/2'>
+	const btnCancelOrder = (
+		<form action={cancelOrder} className='w-1/2'>
 			<div className='flex flex-nowrap items-center border rounded border-red-400 hover:bg-red-400 hover:border-white transition'>
+				<input type='hidden' value={order.id} name='order_id' />
+
 				<input
 					type='submit'
 					className='w-full uppercase font-bold cursor-pointer text-sm tracking-wider py-2.5'
@@ -88,8 +91,8 @@ export default function OrderCard({ order }: OrderCardProps) {
 			{renderTotal}
 
 			<div className='flex justify-between gap-x-3 items-center'>
-				{confirmOrder}
-				{cancelOrder}
+				{btnConfirmOrder}
+				{btnCancelOrder}
 			</div>
 		</article>
 	);
